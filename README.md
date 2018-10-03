@@ -8,7 +8,7 @@ The original kenmatic model for vehicle motion consists of 4 state as [x,y,v,psi
 
 The model predict the states in the next time step based on the currect states and the control inputs namely **steering angle (delta)** and **throthel (a)** as decribed in the equations below:
 
-<img src="Equations.jpg" width="350"> <img src="./Figures/image2.jpg">
+<img src="Equations.jpg" width="550">
 
 
 
