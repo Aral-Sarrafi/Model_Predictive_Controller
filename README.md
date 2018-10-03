@@ -1,4 +1,24 @@
-# CarND-Controls-MPC
+# Model Predictive Controller (MPC)
+
+This repository implements a model predictive controller to drive a vehicle around the track. The model predictive controller uses the vehicle motion model to predict the outcome for the next 10 time steps ahead and computes the controll signals (steering angles and throthel) by minimizing a cost function. The cost fuction can be modified to take into account different criteras of an excellent autonmous driving system. In the following pragraph the rubic points are answerd.
+
+# Rubric Points
+* **The Model: Student describes their model in detail. This includes the state, actuators and update equations.**
+The original kenmatic model for vehicle motion consists of 4 state as [x,y,v,psi] in which **x** and **y** are denoting the location of the **v** is the velocity and **psi** is the orientation of the car. This state vector has been extended by adding two more additional states to it namely **cte** (track error) and **epsi** (orientation error) which make the final state vector [x,y,v,psi,cte,epsi]. Adding the additional states are necessary for tracking the desired trajectory.
+
+The model predict the states in the next time step based on the currect states and the control inputs namely **steering angle (delta)** and **throthel (a)** as decribed in the equations below:
+
+
+
+* **Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.**
+
+
+* **If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.**
+
+* **The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.**
+
+
+
 
 
 ---
