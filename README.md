@@ -1,7 +1,7 @@
 # Model Predictive Controller (MPC)
 
 This repository implements a predictive model controller to drive a vehicle around the track. The model predictive controller uses the vehicle motion model to predict the outcome for the next 10 time steps ahead and computes the control signals (steering angles and throttle) by minimizing a cost function. The cost function can be modified to take into account different criteria of an excellent autonomous driving system. In the following paragraph, the rubric points are answered.
-
+<img src="MPC.gif">
 # Rubric Points
 * **The Model: Student describes their model in detail. This includes the state, actuators and update equations.**
 
