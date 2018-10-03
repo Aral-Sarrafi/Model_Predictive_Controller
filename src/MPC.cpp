@@ -47,8 +47,8 @@ class FG_eval {
 	  fg[0] = 0;
 
 	  // Take into account the deviation from the reference state.
-	  double pose_weight = 4000;
-	  double speed_weight = 2;
+	  double pose_weight = 3000;
+	  double speed_weight = 2.5;
 
 
 	  for (unsigned int t = 0; t < N; t++) {
@@ -64,13 +64,14 @@ class FG_eval {
 	  for (unsigned int t = 0; t < N - 1; t++) {
 		  fg[0] += actuator_weight * CppAD::pow(vars[delta_start + t], 2);
 		  fg[0] += actuator_weight * CppAD::pow(vars[a_start + t], 2);
-		  fg[0] += 900 * CppAD::pow(vars[delta_start + t] * vars[v_start + t], 2);
+		  // Penalty for driving fast while turning
+		  fg[0] += 1500 * CppAD::pow(vars[delta_start + t] * vars[v_start + t], 2);
 
 	  }
 	 
 	  // Minimize the gap between the sequential actuations
 	  for (unsigned int t = 0; t < N - 2; t++) {
-		  fg[0] += 200 * CppAD::pow(vars[delta_start + t + 1] - vars[delta_start + t], 2);
+		  fg[0] += 600 * CppAD::pow(vars[delta_start + t + 1] - vars[delta_start + t], 2);
 		  fg[0] += 10 * CppAD::pow(vars[a_start + t + 1] - vars[a_start + t], 2);
 
 	  }
@@ -105,7 +106,8 @@ class FG_eval {
 		  AD<double> delta = vars[delta_start + t - 1];
 		  AD<double> a = vars[a_start + t - 1];
 
-		  if (t > 1) {   // use previous actuations (to account for latency)
+		  // I use the previous controll inputs to account for the latency of 100milisec in the system
+		  if (t > 1) {
 			  a = vars[a_start + t - 2];
 			  delta = vars[delta_start + t - 2];
 		  }
